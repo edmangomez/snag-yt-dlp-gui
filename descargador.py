@@ -25,24 +25,35 @@ def carpeta_app():
     return os.path.dirname(os.path.abspath(__file__))
 
 
+def _recurso_binario(nombre):
+    """Busca un binario empaquetado: primero junto al exe (permite actualizarlo
+    reemplazando el archivo) y luego en _MEIPASS (incrustado por PyInstaller)."""
+    carpetas = [os.path.dirname(sys.executable)]
+    ruta_meipass = getattr(sys, "_MEIPASS", "")
+    if ruta_meipass:
+        carpetas.append(ruta_meipass)
+    for carpeta in carpetas:
+        candidata = os.path.join(carpeta, nombre)
+        if os.path.isfile(candidata):
+            return candidata
+    return None
+
+
 def localizar_ytdlp():
     if esta_empaquetado():
-        ruta = os.path.join(carpeta_app(), "yt-dlp.exe")
-        return ruta if os.path.isfile(ruta) else None
+        return _recurso_binario("yt-dlp.exe")
     return shutil.which("yt-dlp")
 
 
 def localizar_ffmpeg():
     if esta_empaquetado():
-        ruta = os.path.join(carpeta_app(), "ffmpeg.exe")
-        return ruta if os.path.isfile(ruta) else None
+        return _recurso_binario("ffmpeg.exe")
     return shutil.which("ffmpeg")
 
 
 def localizar_ffprobe():
     if esta_empaquetado():
-        ruta = os.path.join(carpeta_app(), "ffprobe.exe")
-        return ruta if os.path.isfile(ruta) else None
+        return _recurso_binario("ffprobe.exe")
     return shutil.which("ffprobe")
 
 

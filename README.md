@@ -6,9 +6,12 @@ GUI minimalista para yt-dlp en Windows. Descarga videos en MP4 y audio en MP3 co
 
 ## Descarga
 
-Ve a [Releases](https://github.com/edmangomez/snag-yt-dlp-gui/releases) y descarga `Snag-Windows.zip` para Windows.
+Ve a [Releases](https://github.com/edmangomez/snag-yt-dlp-gui/releases) y elige una de estas dos opciones para Windows:
 
-El ZIP es **portable**: extrae los 5 archivos en una carpeta y ejecuta `Snag.exe`. No requiere instalación de Python, yt-dlp ni FFmpeg.
+- **`Snag-Setup.exe`** — instalador oficial (Inno Setup): instala Snag en Program Files con accesos directos.
+- **`Snag-Portable.zip`** — versión portable: descomprime y ejecuta `Snag.exe` directamente.
+
+Ambas son **auto-contenidas**: incluyen yt-dlp y FFmpeg incrustados; no requieren instalación de Python, yt-dlp ni FFmpeg ni depender de archivos externos.
 
 > ⚠️ Windows SmartScreen puede mostrarte un aviso porque el ejecutable no está firmado. Pulsa "Más información" → "Ejecutar de todas formas".
 
@@ -43,10 +46,10 @@ Requisitos: Python 3.10+, [yt-dlp](https://github.com/yt-dlp/yt-dlp), [FFmpeg](h
 
 ```
 pip install pyinstaller
-python -m PyInstaller --onefile --windowed --icon snag.ico --add-data "snag.ico;." --name Snag descargador.py
+python -m PyInstaller --onefile --noconsole --icon snag.ico --add-data "snag.ico;." --add-binary "dist/yt-dlp.exe;." --add-binary "dist/ffmpeg.exe;." --add-binary "dist/ffprobe.exe;." --name Snag descargador.py
 ```
 
-Copia `yt-dlp.exe`, `ffmpeg.exe` y `ffprobe.exe` junto a `Snag.exe`.
+Los binarios de yt-dlp, ffmpeg y ffprobe quedan **incrustados** en `Snag.exe` (también se usan desde `_MEIPASS`); no hace falta copiarlos aparte. Para usar una versión distinta de yt-dlp, coloca un `yt-dlp.exe` junto al ejecutable y tendrá prioridad.
 
 ## Modo de prueba (sin ventana)
 

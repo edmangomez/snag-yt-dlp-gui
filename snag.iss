@@ -12,6 +12,7 @@ AppId={{B8E1A2D4-5C7F-4A9B-9E3D-2F6A8C1B4E5D}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher=Snag
+AppPublisherURL=https://github.com/edmangomez/snag-yt-dlp-gui
 DefaultDirName={autopf}\Snag
 DefaultGroupName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
@@ -25,9 +26,6 @@ SetupIconFile={#SourcePath}snag.ico
 
 [Files]
 Source: "Snag.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "yt-dlp.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "ffmpeg.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "ffprobe.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "snag.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
